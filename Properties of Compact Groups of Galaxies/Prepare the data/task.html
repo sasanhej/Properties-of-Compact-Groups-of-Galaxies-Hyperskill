@@ -1,0 +1,48 @@
+<div class="step-text">
+<h5 id="description">Description</h5>
+<p>In this project, we will explore the properties of <strong>compact groups of galaxies (CGs)</strong> in order to develop data analysis skills. We will work with a dataset designed for and by astrophysicists studying CGs. </p>
+<p>The dataset columns contain the following information:</p>
+<ul>
+<li><code class="java">Group</code> — the group name;</li>
+<li><code class="java">z</code> — <strong>redshift,</strong> a value that indicates the distance to the object;</li>
+<li><code class="java">mean_mu</code> — the surface brightness of stars that are located between galaxies, called <strong>intra-group light</strong> (IGL);</li>
+<li><code class="java">features</code> — the presence of visible signatures around the galaxies of CG, called <strong>low surface brightness</strong> (LSB) feature: <code class="java">1</code> if yes, <code class="java">0</code> if no.</li>
+</ul>
+<p>Take a look at the sample:</p>
+<pre><code class="language-no-highlight">      Group         z    mean_mu  features
+1     HCG 2  0.014507  27.589243         1
+3     HCG 5  0.040765  27.019451         1
+4     HCG 7  0.013950  28.283607         1
+5     HCG 8  0.054002  26.076726         1
+6    HCG 12  0.048263  26.740798         1
+</code></pre>
+<p></p><div class="alert alert-primary">In the Theory part, you will find a more detailed explanation of the basic concepts used in the project. But if you want to practice with <code class="java">pandas</code> and statistics, feel free to skip it and get down to the objectives.</div>
+<h5 id="theory">Theory</h5>
+<p>Let's learn more about essential terms.</p>
+<ul>
+<li>The<strong> apparent magnitude</strong> <span class="math-tex">\(m\)</span> tells how bright a star or any other source appears to us at a distance from the Earth. The scale is logarithmic and inverse. A larger magnitude corresponds to a fainter source. In our case, the surface brightness is quoted on a magnitude scale — in magnitudes per square arcsecond, usually denoted by the Greek letter <span class="math-tex">\(\mu\)</span>. For more information, refer to the article <a href="https://www.learnthesky.com/blog/apparent-versus-absolute-magnitude" rel="noopener noreferrer nofollow" target="_blank">Apparent versus Absolute Magnitude</a> by Learn the Sky.</li>
+<li>A redshift<strong> </strong>indicates the distance to the object. It is an increase in the wavelength of electromagnetic radiation caused solely by the expansion of the Universe. As the Universe expands, it stretches light that travels through space in a cosmological redshift phenomenon. The greater the redshift, the greater the distance the light has traveled. The <a href="https://www.youtube.com/watch?v=W8ymm_1_ruw" rel="noopener noreferrer nofollow" target="_blank">Cosmological Redshift (YouTube)</a> video by Jason Kendall can shed more light on this.</li>
+<li>An intra-group light<strong> </strong>(IGL) is the faint light from stars between galaxy groups. The vast majority of stars in galaxy groups are within their constituent galaxies. However, a small fraction of stars are expected to follow the global dark matter potential of the group. These stars form an IGL component.</li>
+<li>Within the <strong>Lambda cold dark matter</strong> (ΛCDM) cosmological model, galaxy interactions play a major role in the hierarchical galaxy formation theory. The hierarchical structure formation paradigm requires every galaxy to undergo interactions throughout its lifetime. Each interaction leaves visible signatures around galaxies in faint shells, tidal tails, halos, plumes, and stellar streams. These low surface brightness<strong> </strong>(LSB) features around galaxies encode the hierarchical nature of the cosmological structure formation. Modern LSB methods of observation can detect these features. To get a complete picture of this field of astronomy, you can study this review article: <a href="https://ui.adsabs.harvard.edu/abs/2020arXiv200111067B/abstract" rel="noopener noreferrer nofollow" target="_blank">The Vera Rubin Observatory Legacy Survey of Space and Time and the Low Surface Brightness Universe</a>. Take a look at schematic images of various LSB features:</li>
+</ul>
+<p style="text-align: center;"><img alt="" height="618" name="features_examples.png" src="https://ucarecdn.com/14e40076-c883-4236-9d06-dbb67df6513c/" width="453"/></p>
+<h5 id="objectives">Objectives</h5>
+<p>Examine the box plot below for the mean surface brightness of the IGL in a group of compact groups of galaxies (CGs) with low surface brightness (LSB) features and without them. Try to plot the same chart. Then find a mean redshift for these CGs.</p>
+<p style="text-align: center;"><img alt="" height="288" name="boxplot_stage1.jpeg" src="https://ucarecdn.com/9d8c2dd6-a586-416a-ba14-40ec18974ad2/" width="432"/></p>
+<p></p><div class="alert alert-warning">The surface brightness is quoted on an inverse magnitude scale, so to place the brighter sources at the top, astronomers usually invert the magnitude axis.</div>
+<p>Try to answer the questions:</p>
+<ul>
+<li>Is the surface brightness of the IGL in a group higher for groups of galaxies with or without LSB features?</li>
+<li>Are groups of galaxies with LSB features further or closer to us?</li>
+</ul>
+<p>To complete this stage:</p>
+<ol>
+<li>Read the following dataset: <em><a href="https://stepik.org/media/attachments/lesson/665342/groups.tsv" rel="noopener noreferrer nofollow" target="_blank">groups.tsv</a></em>. TSV stands for tab-separated values. Use the <code class="java">pandas.read_csv</code> method with the parameter <code class="java">delimiter='\t'</code>;</li>
+<li>Remove the missing values from the dataset. You can use the <code class="java">dropna</code> function;</li>
+<li>Find a mean value for the IGL mean surface brightness in groups of galaxies with LSB features and without them;</li>
+<li>Print two floating-point numbers separated by a space: the mean value of the mean surface brightness for galaxies with and without LSB features.</li>
+</ol>
+<h5 id="example">Example</h5>
+<p><strong>Example 1</strong><em>: an example of the program output</em></p>
+<pre><code class="language-no-highlight">24.03338 23.22678 </code></pre>
+</div>

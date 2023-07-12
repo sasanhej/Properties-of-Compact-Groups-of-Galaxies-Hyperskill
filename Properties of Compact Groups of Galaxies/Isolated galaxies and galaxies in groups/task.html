@@ -1,0 +1,96 @@
+<div class="step-text">
+<h5 id="description">Description</h5>
+<p>To explore the impact of high density in compact groups on forming early-type galaxies, consider the differences between the compact groups of galaxies and a sample of isolated galaxies. In the latter, we have included galaxies that have no companions within a projected distance of <span class="math-tex">\(1\)</span> Mpc with a redshift difference lower than <span class="math-tex">\(0.001\)</span>. To have better results, we only selected galaxies with the redshifts of <span class="math-tex">\(0.01 ≤ z ≤ 0.06\)</span> (<span class="math-tex">\(z\)</span> is a notation for the redshift).</p>
+<p>In this stage, you have two datasets with samples of isolated and grouped galaxies. The isolated galaxies' dataset contains a single column <code class="java">n</code> with the <strong>Sérsic indexes.</strong> The dataset with compact groups of galaxies includes four columns:</p>
+<ul>
+<li><code class="java">Group</code> — the group name;</li>
+<li><code class="java">Name</code> — the galaxy name;</li>
+<li><code class="java">n</code> — the Sérsic index, a parameter used to describe the shape of a galaxy's light profile. In simple words, a higher value corresponds to a higher concentration of light in the center;</li>
+<li><code class="java">T</code> — the numerical <strong>Hubble stage</strong>, which indicates a galaxy's morphology according to the de Vaucouleurs galaxy classification system. We will use this column at the next stage.</li>
+</ul>
+<p>Look at a sample of the CGs dataset:</p>
+<pre><code class="language-no-highlight">   Group                       Name        n  T
+0  HCG 1            UGC 00248 NED01   2.8641  5
+1  HCG 1            UGC 00248 NED02   3.3413  1
+2  HCG 1  WISEA J002558.82+254331.0   2.8468 -2
+3  HCG 1  WISEA J002554.42+254325.2  11.2216 -5
+4  HCG 2                  UGC 00314   1.8987  5</code></pre>
+<p></p><div class="alert alert-primary">In the Theory part, you will find a more detailed explanation of the new terms mentioned in this stage. But if you want to practice with <code class="java">pandas</code> and statistics, feel free to skip it and get down to the objectives.</div>
+<h5 id="theory">Theory</h5>
+<p>Galaxy morphological classification is a system astronomers use to divide galaxies into groups based on their visual appearance. To compare isolated galaxies and galaxies in groups, the de Vaucouleurs galaxy classification system<strong> </strong>and the Sérsic index can be used.</p>
+<p>Each class of galaxies in the de Vaucouleurs system corresponds to a numerical value — values of the numerical<strong> </strong>Hubble stage <span class="math-tex">\(T\)</span> run from <span class="math-tex">\(-6\)</span> to <span class="math-tex">\(10\)</span>. Negative numbers correspond to the early-type galaxies (ellipticals and lenticulars), and positive numbers indicate the late types (spirals and irregulars). Look at the diagram of the morphology of the de Vaucouleurs system and the relationship table with the numerical Hubble stage.</p>
+<p><img alt="" height="1057" name="Hubble_-_de_Vaucouleurs_Galaxy_Morphology_Diagram.png" src="https://ucarecdn.com/d30f0a63-e824-4232-9b26-2fe7b0c6e418/" width="1920"/></p>
+<p style="text-align: center;"><em>Author: Antonio Ciccolella / M. De Leo - <a href="https://en.wikipedia.org/wiki/File:Hubble-Vaucouleurs.png" rel="noopener noreferrer nofollow" target="_blank">https://en.wikipedia.org/wiki/File:Hubble-Vaucouleurs.png</a></em></p>
+<table border="1" cellpadding="0" cellspacing="0">
+<tbody>
+<tr>
+<td>Hubble stage <span class="math-tex">\(T\)</span></td>
+<td>−6</td>
+<td>−5</td>
+<td>−4</td>
+<td>−3</td>
+<td>−2</td>
+<td>−1</td>
+<td>0</td>
+<td>1</td>
+<td>2</td>
+<td>3</td>
+<td>4</td>
+<td>5</td>
+<td>6</td>
+<td>7</td>
+<td>8</td>
+<td>9</td>
+<td>10</td>
+</tr>
+<tr>
+<td>de Vaucouleurs class</td>
+<td>cE</td>
+<td>E</td>
+<td>E<sup>+</sup></td>
+<td>S0<sup>−</sup></td>
+<td>S0<sup>0</sup></td>
+<td>S0<sup>+</sup></td>
+<td>S0/a</td>
+<td>Sa</td>
+<td>Sab</td>
+<td>Sb</td>
+<td>Sbc</td>
+<td>Sc</td>
+<td>Scd</td>
+<td>Sd</td>
+<td>Sdm</td>
+<td>Sm</td>
+<td>Im</td>
+</tr>
+</tbody>
+</table>
+<p>You can learn more in <a href="https://www.youtube.com/watch?v=clETiW66Pvc" rel="noopener noreferrer nofollow" target="_blank">Hubble's Galaxy Classification Scheme</a> video (YouTube) by Jason Kendall. </p>
+<p>The <strong>Sérsic profile</strong> is a mathematical function that describes how the intensity <span class="math-tex">\(I\)</span> of a galaxy varies with distance <span class="math-tex">\(r\)</span> from its center. The Sérsic surface-brightness profile takes the form:</p>
+<p style="text-align: center;"><span class="math-tex">\(I(r) = I_\mathrm{e} \exp \left(-\nu_\mathrm{n}\left[\left(\frac{r}{r_\mathrm{e}}\right)^{1/n} - 1 \right]\right)\,,\)</span></p>
+<p>where <span class="math-tex">\(I_\mathrm{e}\)</span> is the surface brightness at the effective radius <span class="math-tex">\(r_\mathrm{e}\)</span>, and <span class="math-tex">\(n\)</span> is the Sérsic index. <span class="math-tex">\(\nu_\mathrm{n}\)</span> is given by the solution of the equation</p>
+<p style="text-align: center;"><span class="math-tex">\(\Gamma(2\,n) = 2 \gamma(2n, \nu_\mathrm{n})\,,\)</span></p>
+<p>where <span class="math-tex">\(\Gamma(x)\)</span> is the gamma function, and <span class="math-tex">\(\gamma(s, x)\)</span> is the incomplete gamma function.</p>
+<p>Sérsic profiles with different indexes:</p>
+<p style="text-align: center;"><img alt="" height="492" name="sersic_models_with_different_indices.png" src="https://ucarecdn.com/7cca6a6a-0219-4720-878a-96aeb4a8b51f/" width="738"/></p>
+<p>Galaxies with a Sérsic index greater than <span class="math-tex">\(2\)</span> tend to be early-type or early-spirals galaxies. So, considering a fraction of such galaxies in both datasets may be a good idea.</p>
+<h5 id="objectives">Objectives</h5>
+<p>Load the datasets of isolated galaxies and galaxies in compact groups. Examine the histograms for the Sérsic index of isolated and galaxy groups in the picture below and try to plot the same chart. To discover the differences between the isolated galaxies and galaxies in CGs, perform the Kolmogorov-Smirnov homogeneity test for galaxy distributions using the Sérsic index.</p>
+<p><img alt="" height="480" name="hist_stage3.jpg" src="https://ucarecdn.com/2e74f71d-18d8-44f5-994d-94ff518d41cc/" width="640"/></p>
+<p>Try to answer the following questions:</p>
+<ul>
+<li>If we say that a higher value of <code class="java">n</code> corresponds to early-type galaxies, then where is the concentration of early-type galaxies greater — among grouped or isolated ones?</li>
+<li>Can we say that the distribution of <code class="java">n</code> is the same for groups of galaxies and isolated ones?</li>
+</ul>
+<p>To complete this stage:</p>
+<ol>
+<li>Read the datasets: <em><a href="https://stepik.org/media/attachments/lesson/665342/galaxies_morphology.tsv" rel="noopener noreferrer nofollow" target="_blank">galaxies_morphology.tsv</a></em> and <em><a href="https://stepik.org/media/attachments/lesson/665342/isolated_galaxies.tsv" rel="noopener noreferrer nofollow" target="_blank">isolated_galaxies.tsv</a></em>;</li>
+<li>Plot the histograms for the Sérsic index for both datasets;</li>
+<li>Calculate a fraction of galaxies with the Sérsic index <span class="math-tex">\(n &gt; 2\)</span> for both datasets;</li>
+<li>Perform <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.ks_2samp.html" rel="noopener noreferrer nofollow" target="_blank">the two-sample Kolmogorov-Smirnov test</a> to check whether galaxies from two samples are similar for the Sérsic index and obtain a <span class="math-tex">\(p\)</span>-value. Note that you must use a two-sided alternative for this test. It means that the null hypothesis is that the two given samples are drawn from the same probability distribution;</li>
+<li>Print three floating-point numbers separated by one space: fractions of galaxies with the Sersic index <span class="math-tex">\(n &gt; 2\)</span> for groups and isolated galaxies and a <span class="math-tex">\(p\)</span>-value obtained from the Kolmogorov-Smirnov test.</li>
+</ol>
+<h5 id="example">Example</h5>
+<p><strong>Example 1</strong>: <em>an example of the program output</em></p>
+<pre><code class="language-no-highlight">0.23693 0.31745 5.16332e-7</code></pre>
+</div>

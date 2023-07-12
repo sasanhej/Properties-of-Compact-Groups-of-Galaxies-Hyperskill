@@ -1,0 +1,24 @@
+<div class="step-text">
+<h5 id="description">Description</h5>
+<p>Examine the influence of the LSB features (<code class="java">features</code>) on the IGL mean surface brightness (<code class="java">mean_mu</code>) with the <strong>one-way analysis of variance </strong>(ANOVA).</p>
+<p></p><div class="alert alert-primary">The ANOVA test has conditions that must be fulfilled so that the associated <span class="math-tex">\(p\)</span>-value can be valid:
+
+<ul>
+<li>The samples must be independent;</li>
+<li>Each sample is derived from a normally distributed population;</li>
+<li>The variances of the groups are equal (the homogeneity of variances).</li>
+</ul>
+<p>The independence of samples is guaranteed in our data, so we need to check only the last two conditions to perform the ANOVA test after.</p></div>
+<p>This project includes a lot of hypothesis testing. For an intuitive understanding of this topic, we highly recommend a set of 3 min videos on <a href="https://www.youtube.com/playlist?list=PLRKtJ4IpxJpBxX2S9wXJUhB1_ha3ADFpF" rel="noopener noreferrer nofollow" target="_blank">stat thinking by Cassie Kozyrkov</a>🚀</p>
+<h5 id="objectives">Objectives</h5>
+<p>To complete this stage, perform the following analysis:</p>
+<ol>
+<li>Conduct <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.shapiro.html" rel="noopener noreferrer nofollow" target="_blank">the Shapiro-Wilk Normality test</a> for the IGL mean surface brightness (the <code class="java">mean_mu</code> column) in galaxies with LSB features and without them. This step checks the second condition of the ANOVA test: each sample came from a normally distributed population. Is the condition satisfied?</li>
+<li>Perform <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.fligner.html" rel="noopener noreferrer nofollow" target="_blank">the Fligner-Killeen Homogeneity test</a> for variances of the same two data samples. This step checks the third condition: the samples came from populations with equal variances. Is the condition satisfied?</li>
+<li>Perform <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.f_oneway.html" rel="noopener noreferrer nofollow" target="_blank">the one-way ANOVA test</a> and obtain a <span class="math-tex">\(p\)</span>-value. The test's null hypothesis is that both groups (galaxies with LSB features and without them) are drawn from the populations with the same IGL mean surface brightness. Do LSB features significantly influence the IGL mean surface brightness according to the test?</li>
+<li>Print four floating-point numbers. Separate them with one space: two <span class="math-tex">\(p\)</span>-values for the Shapiro-Wilk test for galaxies with LSB features and without them, one <span class="math-tex">\(p\)</span>-value obtained from the Fligner-Killeen test, and one <span class="math-tex">\(p\)</span>-value of the ANOVA test.</li>
+</ol>
+<h5 id="example">Example</h5>
+<p><strong>Example 1</strong><em>: an example of the program output</em></p>
+<pre><code class="language-no-highlight">0.45231 0.91227 0.78522 0.20332</code></pre>
+</div>
